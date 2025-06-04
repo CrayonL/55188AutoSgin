@@ -29,34 +29,15 @@ def login_with_cookie(cookie_str, verify_url, keyword):
         return None
 
 def sign_in(session):
-    url = "https://www.55188.com/plugin.php?id=dsu_paulsign:sign&operation=qiandao&inajax=1"
-    data = {
-        'formhash': '',  # 稍后填
-        'qdmode': 1,
-        'todaysay': '早上好，签到来了！',
-        'fastreply': 1
-    }
+    url = "https://www.55188.com/plugin.php?id=sign&mod=add&jump=1"
+    response = session.get(url)
 
-    # 获取 formhash
-    homepage = session.get("https://www.55188.com/plugin.php?id=dsu_paulsign:sign")
-    if "formhash" in homepage.text:
-        import re
-        match = re.search(r'name="formhash" value="(\w+)"', homepage.text)
-        if match:
-            data['formhash'] = match.group(1)
-        else:
-            print("❌ 未能提取 formhash")
-            return
-    else:
-        print("❌ 页面中未包含 formhash，可能未登录")
-        return
-
-    # 提交签到请求
-    response = session.post(url, data=data)
-    if "签到成功" in response.text or "已经签到" in response.text:
+    if "已经签到" in response.text or "签到成功" in response.text or "签到记录" in response.text:
         print("🎉 签到成功！")
+    elif "您今天还没有签到" in response.text:
+        print("⚠️ 已打开签到页面，但好像没有执行签到动作")
     else:
-        print("❌ 签到失败，返回内容：")
+        print("⚠️ 无法确认签到状态，返回内容如下：")
         print(response.text[:300])
 
 if __name__ == '__main__':
