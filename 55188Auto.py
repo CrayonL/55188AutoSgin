@@ -37,5 +37,5 @@ if __name__ == '__main__':
 
     if not cookie:
         raise ValueError("❌ 未设置 COOKIE_55188 环境变量，请检查 GitHub Secrets 设置")
-
+    verify_url = "https://www.55188.com/usercp.php"  # 这是 55188 登录后的页面，可以换成你想验证的地址
     login_with_cookie(cookie, verify_url, keyword)
