@@ -1,5 +1,4 @@
 # -*- coding:utf-8 -*-
-import os
 import requests
 
 def cookie_str_to_dict(cookie_str):
@@ -15,22 +14,23 @@ def login_with_cookie(cookie_str, verify_url, keyword):
     cookie_dict = cookie_str_to_dict(cookie_str)
     session.cookies.update(cookie_dict)
 
-    try:
-        headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
-    "Referer": "https://www.55188.com/",
-    "Host": "www.55188.com",
-    "Accept": "text/html,application/xhtml+xml",
-    "Accept-Language": "zh-CN,zh;q=0.9"
-}
+    headers = {
+        "User-Agent": "Mozilla/5.0",
+        "Referer": "https://www.55188.com/",
+        "Host": "www.55188.com",
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+    }
 
+    try:
         response = session.get(verify_url, headers=headers)
         response.encoding = 'gbk'
         if keyword in response.text:
             print("✅ Cookie login success")
-            return session  # 返回 session 用于后续请求
+            return session
         else:
             print("❌ Cookie invalid or expired")
+            print("👇 返回内容预览：")
             print(response.text[:300])
             return None
     except Exception as e:
@@ -38,34 +38,35 @@ def login_with_cookie(cookie_str, verify_url, keyword):
         return None
 
 def sign_in(session):
-    url = "https://www.55188.com/plugin.php?id=sign&mod=add&jump=1"
-
+    sign_url = "https://www.55188.com/plugin.php?id=sign&mod=add&jump=1"
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
-        "Referer": "https://www.55188.com/",
+        "User-Agent": "Mozilla/5.0",
+        "Referer": "https://www.55188.com/plugin.php?id=sign",
         "Host": "www.55188.com",
         "Accept": "text/html,application/xhtml+xml",
         "Accept-Language": "zh-CN,zh;q=0.9"
     }
 
-    response = session.get(url, headers=headers)
+    response = session.get(sign_url, headers=headers)
+    response.encoding = 'gbk'
 
-    if "已经签到" in response.text or "签到成功" in response.text or "签到记录" in response.text:
-        print("🎉 签到成功！")
-    elif "您今天还没有签到" in response.text:
-        print("⚠️ 已打开签到页面，但好像没有执行签到动作")
+    if "status" in response.text and "success" in response.text:
+        print("🎉 签到成功！status: success")
+    elif "已经签到" in response.text:
+        print("✅ 今天已经签到过了")
     else:
         print("⚠️ 无法确认签到状态，返回内容如下：")
         print(response.text[:300])
 
 if __name__ == '__main__':
-    cookie = os.environ.get("COOKIE_55188")
+    # 👇 在这里粘贴你的 Cookie 字符串
+    cookie = "passport2bbs=pfJTp8aScNazKYCGmTMpBU2JZW46lY2oldpVTa2p54SMFX1eaQ5R5WQNTPseqiYd; cdb2_auth=iCeohzTEXNZAL9AD5UyLjzv3wVZ5%2BplYCwuhgRiGL%2FY1HnVTQLu%2BBTq%2BVuGnr6E0Ig; vOVx_56cc_auth=3828i61AuOpPr7trSRcSym58Dsn8FV20lGaeEvBXUYd5BskLruqW0ikWlUO2KsuyrIeZf4RWp2Elh5cTrXsYwQgVdm6X; vOVx_56cc_sid=mjAJiK; vOVx_56cc_plugin_sign_cookie=9c74b5def39f2c33e3f3618b409f4f6c; vOVx_56cc_lastact=1749032182%09home.php%09follow"
 
     if not cookie:
-        raise ValueError("❌ 未设置 COOKIE_55188 环境变量，请检查 GitHub Secrets 设置")
+        raise ValueError("❌ 未设置 COOKIE，请检查输入")
 
-    verify_url = "https://www.55188.com/plugin.php?id=dsu_paulsign:sign"
-    keyword = "欢迎回到理想大家庭"
+    verify_url = "https://www.55188.com/plugin.php?id=sign"
+    keyword = "理想股票技术论坛"  # 登录后页面中出现的关键词
 
     session = login_with_cookie(cookie, verify_url, keyword)
     if session:
