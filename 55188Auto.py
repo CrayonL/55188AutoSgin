@@ -11,8 +11,8 @@ def cookie_str_to_dict(cookie_str):
     return cookie_dict
 
 def login_with_cookie(cookie_str, verify_url, keyword):
-    response.encoding = 'gbk'
     session = requests.session()
+    response.encoding = 'gbk'
     cookie_dict = cookie_str_to_dict(cookie_str)
     session.cookies.update(cookie_dict)
 
