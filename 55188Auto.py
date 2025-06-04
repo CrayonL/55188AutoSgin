@@ -16,7 +16,15 @@ def login_with_cookie(cookie_str, verify_url, keyword):
     session.cookies.update(cookie_dict)
 
     try:
-        response = session.get(verify_url)
+        headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
+    "Referer": "https://www.55188.com/",
+    "Host": "www.55188.com",
+    "Accept": "text/html,application/xhtml+xml",
+    "Accept-Language": "zh-CN,zh;q=0.9"
+}
+
+        response = session.get(verify_url, headers=headers)
         if keyword in response.text:
             print("✅ Cookie login success")
             return session  # 返回 session 用于后续请求
@@ -30,7 +38,16 @@ def login_with_cookie(cookie_str, verify_url, keyword):
 
 def sign_in(session):
     url = "https://www.55188.com/plugin.php?id=sign&mod=add&jump=1"
-    response = session.get(url)
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/114.0.0.0 Safari/537.36",
+        "Referer": "https://www.55188.com/",
+        "Host": "www.55188.com",
+        "Accept": "text/html,application/xhtml+xml",
+        "Accept-Language": "zh-CN,zh;q=0.9"
+    }
+
+    response = session.get(url, headers=headers)
 
     if "已经签到" in response.text or "签到成功" in response.text or "签到记录" in response.text:
         print("🎉 签到成功！")
