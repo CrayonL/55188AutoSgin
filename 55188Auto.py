@@ -12,7 +12,6 @@ def cookie_str_to_dict(cookie_str):
 
 def login_with_cookie(cookie_str, verify_url, keyword):
     session = requests.session()
-    response.encoding = 'gbk'
     cookie_dict = cookie_str_to_dict(cookie_str)
     session.cookies.update(cookie_dict)
 
@@ -26,6 +25,7 @@ def login_with_cookie(cookie_str, verify_url, keyword):
 }
 
         response = session.get(verify_url, headers=headers)
+        response.encoding = 'gbk'
         if keyword in response.text:
             print("✅ Cookie login success")
             return session  # 返回 session 用于后续请求
