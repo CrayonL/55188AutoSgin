@@ -60,8 +60,7 @@ def sign_in(session):
 
 if __name__ == '__main__':
     # 👇 在这里粘贴你的 Cookie 字符串
-    cookie = "passport2bbs=pfJTp8aScNazKYCGmTMpBU2JZW46lY2oldpVTa2p54SMFX1eaQ5R5WQNTPseqiYd; cdb2_auth=iCeohzTEXNZAL9AD5UyLjzv3wVZ5%2BplYCwuhgRiGL%2FY1HnVTQLu%2BBTq%2BVuGnr6E0Ig; vOVx_56cc_auth=3828i61AuOpPr7trSRcSym58Dsn8FV20lGaeEvBXUYd5BskLruqW0ikWlUO2KsuyrIeZf4RWp2Elh5cTrXsYwQgVdm6X; vOVx_56cc_sid=mjAJiK; vOVx_56cc_plugin_sign_cookie=9c74b5def39f2c33e3f3618b409f4f6c; vOVx_56cc_lastact=1749032182%09home.php%09follow"
-
+    cookie = os.environ.get("COOKIE_55188")
     if not cookie:
         raise ValueError("❌ 未设置 COOKIE，请检查输入")
 
