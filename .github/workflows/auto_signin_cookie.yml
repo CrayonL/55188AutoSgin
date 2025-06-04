@@ -1,0 +1,26 @@
+name: Cookie Sign-in
+
+on:
+  schedule:
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+
+jobs:
+  cookie-signin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run sign-in with cookie
+        env:
+          COOKIE_55188: ${{ secrets.COOKIE_55188 }}
+        run: python signin_cookie.py
