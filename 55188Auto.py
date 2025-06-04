@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 import requests
+import os
 
 def cookie_str_to_dict(cookie_str):
     cookie_dict = {}
