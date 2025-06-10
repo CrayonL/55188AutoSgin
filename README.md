@@ -1,10 +1,3 @@
-了解了！你是要把这个 **55188 自动签到脚本挂在 GitHub 上，通过 GitHub Actions 自动运行**。下面是专为此场景编写的 `README.md`，包含：
-
-* 脚本说明
-* 使用方法（GitHub Actions 自动运行）
-* Secrets 设置方式
-* 注意事项
-
 ---
 
 ````markdown
