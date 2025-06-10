@@ -2,7 +2,7 @@ name: Cookie Sign-in
 
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '55 15 * * *'
   workflow_dispatch:
 
 jobs:
