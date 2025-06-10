@@ -46,9 +46,7 @@
 - 打开 `Settings` → `Secrets and variables` → `Actions`
 - 点击 `New repository secret`
   - Name：`COOKIE_55188`
-  - Value：粘贴你的完整 Cookie 字符串（包含 `vOVx_56cc_` 等字段）
-
-> 💡 建议从浏览器登录后在开发者工具中复制 Cookie 字符串。
+  - Value：粘贴你的完整 Cookie 字符串(第二步获取的cookie)
 
 ### 3. 启用 GitHub Actions
 
