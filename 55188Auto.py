@@ -17,8 +17,7 @@ def sign_in(cookie_str):
     page_res.encoding = 'gbk'
     
     if 'id="addsign"' not in page_res.text:
-        print("✅ 已签到（无 addsign 按钮）")
-        return
+        return "✅ 已签到（无 addsign 按钮）"
 
     # Step 2: 如果有 addsign，说明可以签到，发起签到请求
     sign_url = "https://www.55188.com/plugin.php?id=sign&mod=add&jump=1"
