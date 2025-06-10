@@ -27,7 +27,7 @@
 - 进入`www.55188.com`
 - f12 进入网络(network)刷新一下页面
 -  选择文档(document),只有一个www.55188.com的文档,单击
-- 选择标头(Headers) → 找到响应标头(ReuestHeaders) → 找到Cookie复制备用
+- 选择标头(Headers) → 找到请求标头(ReuestHeaders) → 找到Cookie复制备用
 
 ### 3. 设置 Cookie（GitHub Secrets）
 
