@@ -1,6 +1,3 @@
----
-
-````markdown
 # 📌 55188 自动签到脚本（基于 GitHub Actions）
 
 本项目使用 Python + GitHub Actions 实现每日自动访问 [55188 股市论坛](https://www.55188.com) 并完成签到操作。
