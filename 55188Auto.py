@@ -1,4 +1,5 @@
 import requests
+import os
 
 def sign_in(cookie_str):
     cookies = dict(i.strip().split("=", 1) for i in cookie_str.split(";") if "=" in i)
