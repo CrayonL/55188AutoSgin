@@ -31,3 +31,8 @@ def sign_in(cookie_str):
 
 if __name__ == '__main__':
     cookie = os.getenv("COOKIE_55188")
+    if not cookie:
+        print("未检测到 COOKIE_55188 环境变量")
+    else:
+        result = sign_in(cookie)
+        return result
